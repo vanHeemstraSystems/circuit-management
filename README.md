@@ -1,17 +1,15 @@
-[![Quarto Publish](https://github.com/vanHeemstraSystems/plot-management/actions/workflows/publish.yml/badge.svg)](https://github.com/vanHeemstraSystems/plot-management/actions/workflows/publish.yml)
+[![Quarto Publish](https://github.com/vanHeemstraSystems/circuit-management/actions/workflows/publish.yml/badge.svg)](https://github.com/vanHeemstraSystems/circuit-management/actions/workflows/publish.yml)
 
-plot-management
-# Plot Management
+circuit-management
+# Circuit Management
 
-Can be read as "Plot Management" at https://app.gitbook.com/s/Rs3XPuVclvoj92Exb9AA/
+Can be read as "Circuit Management" at https://app.gitbook.com/s/Rs3XPuVclvoj92Exb9AA/
 
-Can be browsed as "Plot Management" at https://vanheemstrasystems.github.io/plot-management/
+Can be browsed as "Circuit Management" at https://vanheemstrasystems.github.io/circuit-management/
 
 Documentation of this repository is automatically done with Quarto using GitHub Actions as described at https://github.com/vanHeemstraSystems/quarto-to-github-pages/blob/main/300/300/README.md
 
-Based on "React Plotly.js in JavaScript" https://plotly.com/javascript/react/
-
-Based on "react-ploty.js" at https://github.com/plotly/react-plotly.js
+Based on "CircuitVerse" at https://circuitverse.org/
 
 Based on "create-react-app" at https://github.com/facebook/create-react-app
 
@@ -46,8 +44,6 @@ Based on "Unable to import svg files in typescript" at https://stackoverflow.com
 Based on "How to import SVGs into your NextJS application" at https://frontend-digest.com/how-to-import-svgs-into-nextjs-8ec6100e613f
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-How to use the Plotly.js React component.
 
 Based on "Fetching Data and Updating State in a React Class" at https://www.pluralsight.com/guides/fetching-data-updating-state-react-class
 
@@ -119,17 +115,17 @@ Run as follows:
 
 ```
 $ cd containers/app
-$ docker-compose --file docker-compose.dev.yml --project-name plot-management-dev up --build -d
+$ docker-compose --file docker-compose.dev.yml --project-name circuit-management-dev up --build -d
 ```
 
-**NOTE**: If you get the following error when browsing the Plotly service: 
+**NOTE**: If you get the following error when browsing the Circuit service: 
 
 ``````
 Unhandled Runtime Error
 ApolloError: Failed to fetch
 ``````
 
-Know that this is most likely caused by the Hasura service not being up and running yet, therefor not able to sent the requested data to the Plotly Service. To fix it, start the Hasura service.
+Know that this is most likely caused by the Hasura service not being up and running yet, therefor not able to sent the requested data to the Circuit Service. To fix it, start the Hasura service.
 
 **NOTE**: When you try to login to PostgreSQL database via **pgAdmin** (Recommended), use the following credentials:
 
@@ -142,7 +138,7 @@ Right-Click Servers > Register ... Server:
 
 In tab **General**:
 
-- Name: Use a name like "plot-management-dev" (if for development) - REQUIRED
+- Name: Use a name like "circuit-management-dev" (if for development) - REQUIRED
 
 In tab **Connection**:
 
@@ -162,7 +158,7 @@ In tab **Connection**:
 
 See http://hostname:hasura-port-number/console/data/manage/connect
 
-- Database Display Name: **Plot Management - Dev** (for development)
+- Database Display Name: **Circuit Management - Dev** (for development)
 - Data Source Driver: **Postgres**
 - Connect Database Via: **Database URL**
 - Database URL: **postgresql://username:password@hostname:5432/databasename**, use the value of HASURA_GRAPHQL_DATABASE_URL_DEV/PROD as specified in .env file
@@ -189,7 +185,7 @@ Bookmark https://hasura.io/learn/graphql/hasura/introduction/?pg=oss-console&plc
 
 ### Define the Schema in Postgres for Our Plot Management Service
 
-The schema of our plot management service is based on Plotly and should follow a nesting alike below:
+The schema of our circuit management service is based on CircuitVerse and should follow a nesting alike below:
 
 ```
 	[
@@ -210,7 +206,7 @@ The schema of our plot management service is based on Plotly and should follow a
      },
   ]          
 ```
-Example of a schema for Plotly nodes.
+Example of a schema for Circuit nodes.
 
 ```
 	 [
@@ -224,7 +220,7 @@ Example of a schema for Plotly nodes.
      }
   ]      
 ```
-Example of a schema for Plotly links.
+Example of a schema for Circuit links.
 
 Taken together, here is the schema for a map (which combines nodes and links):
 
@@ -261,7 +257,7 @@ Taken together, here is the schema for a map (which combines nodes and links):
   ]
 
 ```
-Example of a schema for a Plotly plot.
+Example of a schema for a CircuitVerse circuit.
 
 
 Nodes are unique, they can only exist once (with the same unique identifier).
@@ -283,8 +279,8 @@ Plots are a collection of nodes and links.
 In hasura you can - after having connected to the database and tracked the views - now run a query like below to get a JSON output:
 
 ```
-query fetchFirstPlot {
-  first_plot: plots_view(where: {name: {_eq: "first"}}) {
+query fetchFirstCircuit {
+  first_circuit: circuits_view(where: {name: {_eq: "first"}}) {
     nodes {
       id
       position
@@ -302,7 +298,7 @@ Example outcome of above query:
 ```
 {
   "data": {
-    "first_plot": [
+    "first_circuit": [
       {
         "nodes": [
           {
