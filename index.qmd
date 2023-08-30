@@ -1,5 +1,5 @@
 ---
-title: "Plot Management"
+title: "Circuit Management"
 ---
 
 This is a Quarto website.
