@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Plot Management"
+  title: "Circuit Management"
   navbar:
     left:
       - href: index.qmd
